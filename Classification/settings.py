@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 from decouple import config
-from dj_database_url import parse as dburl
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -27,7 +27,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG',default=False,cast=bool)
 
-ALLOWED_HOSTS = ['text-classifier-narola.herokuapp.com']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -76,13 +76,17 @@ WSGI_APPLICATION = 'Classification.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
 
-default_dburl = 'sqlite:///' + os.path.join(BASE_DIR,'db.sqlite3')
 DATABASES = {
-    {
-        'default': config('DATABASE_URL',default = default_dburl, cast=dburl),
-    }
+ 'default': {
+    'ENGINE': 'django.db.backends.postgresql_psycopg2',
+    'NAME': 'dd0foejvar77ja', 
+    'USER': 'guiofkwmczeunw',
+    'PASSWORD': 'c82d22a9eef058ed53c12835d618053850f33022502aef5b30bb8b2a7f298d87',
+    'HOST': 'ec2-54-163-240-54.compute-1.amazonaws.com'
+ }
 }
-
+DATABASES['default'] = dj_database_url.config()
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
 
 # Password validation
 # https://docs.djangoproject.com/en/1.11/ref/settings/#auth-password-validators
@@ -119,13 +123,11 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_ROOT = 'staticfiles'
 STATIC_URL = '/static/'
 
-# Extra places for collectstatic to find static files.
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR, 'static'),
+ os.path.join(BASE_DIR, 'static'),
 )
-
 
 

@@ -1,1 +1,1 @@
-web: gunicorn text_classifier.wsgi --log-file -
+web: gunicorn Classifcation.wsgi --log-file -
