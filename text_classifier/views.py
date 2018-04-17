@@ -33,7 +33,6 @@ def model_train():
     joblib.dump(clf, 'train_model.pkl') 
 
     
-model_train()
 
 def index(request):
     clf = joblib.load('train_model.pkl')
