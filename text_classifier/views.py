@@ -16,10 +16,10 @@ def model_train():
     COLUMN_NAME = ['Category', 'Content']
     pd.options.display.max_rows = 10
 
-    train_data = pd.read_csv("/Users/c100-58/Desktop/Classification/data/train.csv", names=COLUMN_NAME)
+    train_data = pd.read_csv("./data/train.csv", names=COLUMN_NAME)
     X_train, y_train = train_data, train_data.pop('Category')
 
-    test_data = pd.read_csv("/Users/c100-58/Desktop/Classification/data/test.csv", names=COLUMN_NAME)
+    test_data = pd.read_csv("./data/test.csv", names=COLUMN_NAME)
     X_test, y_test = test_data, test_data.pop('Category')
     count_vect = CountVectorizer()
     X_train_counts = count_vect.fit(X_train['Content']) 
