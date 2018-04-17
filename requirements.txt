@@ -1,6 +1,7 @@
 dj-database-url==0.5.0
 dj-static==0.0.6
 Django==1.11.4
+gunicorn==19.7.1
 numpy==1.14.2
 pandas==0.22.0
 python-dateutil==2.7.2
